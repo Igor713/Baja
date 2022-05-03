@@ -1,0 +1,25 @@
+{
+  "name": "the-time",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Igor Matheus Siquieri",
+  "license": "ISC",
+  "devDependencies": {
+    "gulp": "^4.0.2",
+    "gulp-concat": "^2.6.1",
+    "gulp-sass": "^5.1.0",
+    "gulp-scss": "^1.4.0",
+    "node-sass": "^7.0.1"
+  },
+  "dependencies": {
+    "dotenv": "^16.0.0",
+    "express": "^4.17.3",
+    "multiparty": "^4.2.3",
+    "nodemailer": "^6.7.3",
+    "sass": "^1.49.11"
+  }
+}

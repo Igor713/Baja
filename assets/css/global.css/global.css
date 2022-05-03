@@ -1,0 +1,20 @@
+.main-division {
+  display: flex;
+  height: 100vh; }
+  .main-division custom-menu {
+    background-color: #222831;
+    width: 20%; }
+    .main-division custom-menu .nav .nav-link {
+      color: #EEEEEE; }
+      .main-division custom-menu .nav .nav-link:hover {
+        background-color: #393E46;
+        transition: all 0.5s; }
+  .main-division .content {
+    background-color: #393E46;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 80%; }
+
+nav {
+  background-color: #EEEEEE; }

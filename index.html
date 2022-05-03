@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Baja</title>
+
+    <link rel="stylesheet" href="assets/css/global.css/global.css">
+    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
+</head>
+
+<body>
+    <div class="main-division">
+        <custom-menu></custom-menu>
+
+        <section id="content" class="content"></section>
+    </div>
+
+    <script>
+        let content = document.getElementById('content')
+        console.log("Deu bom!")
+
+        if (content.length == null) {
+            content.innerHTML = `<custom-brand></custom-brand>`
+            console.log('Funcionou')
+        }   
+    </script>
+    <script src="assets/js/bootstrap.min.js"></script>
+    <script src="assets/js/custom-menu.js"></script>
+    <script src="assets/js/register-expenses.js"></script>
+    <script src="assets/js/custom-brand.js"></script>
+</body>
+
+</html>

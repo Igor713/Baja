@@ -1,0 +1,33 @@
+// home
+.main-division {
+    display: flex;
+    height: 100vh;
+
+    custom-menu {
+        background-color: #222831;
+        width: 20%;
+
+        .nav {
+            .nav-link {
+                color: #EEEEEE;
+
+                &:hover {
+                    background-color: #393E46;
+                    transition: all 0.5s;
+                }
+            }
+        }
+    }
+
+    .content {
+        background-color: #393E46;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 80%;
+    }
+}
+
+nav {
+    background-color: #EEEEEE;
+}
