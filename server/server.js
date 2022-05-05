@@ -1,11 +1,25 @@
 const express = require('express')
+const mongoose = require('mongoose')
+
+// Criando a instancia do server
 const app = express()
 
+// Forma de ler JSON / middlewares
+app.use(
+    express.urlencoded({
+        extended: true,
+    }),
+)
+app.use(express.json())
+
+// Rota inicial / endpoint
 app.get('/', (req, res) => {
 
-    return res.json({ message: 'Listening' })
+    // Mostrando requisição
+    res.json({ message: 'Teste' })
 })
 
-app.listen('3333', () => {
-    console.log('Server running on port 3333')
+// Criar porta
+app.listen(3000, () => {
+    console.log("Rodando na porta 3000")
 })

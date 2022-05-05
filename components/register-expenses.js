@@ -42,7 +42,8 @@ class registerExpenses extends HTMLElement {
 
     createForm() {
         const form = document.createElement('form')
-        form.setAttribute('action', '')
+        form.setAttribute('action', '/register')
+        form.setAttribute('method', 'POST')
         form.setAttribute('id', 'form-expenses')
         form.setAttribute('class', 'main-form')
 

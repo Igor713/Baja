@@ -1,28 +1,28 @@
 {
-  "name": "the-time",
+  "name": "baja",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "http://192.168.1.109:8080\r ttp-server -c-1",
+  "main": "",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon ./server/server.js"
   },
-  "author": "Igor Matheus Siquieri",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Igor713/Baja.git"
+  },
+  "keywords": [],
+  "author": "",
   "license": "ISC",
-  "devDependencies": {
-    "gulp": "^4.0.2",
-    "gulp-concat": "^2.6.1",
-    "gulp-sass": "^5.1.0",
-    "gulp-scss": "^1.4.0",
-    "node-sass": "^7.0.1"
+  "bugs": {
+    "url": "https://github.com/Igor713/Baja/issues"
   },
+  "homepage": "https://github.com/Igor713/Baja#readme",
   "dependencies": {
-    "axios": "^0.27.2",
-    "cors": "^2.8.5",
-    "dotenv": "^16.0.0",
     "express": "^4.18.1",
-    "multiparty": "^4.2.3",
-    "nodemailer": "^6.7.3",
-    "nodemon": "^2.0.16",
-    "sass": "^1.49.11"
+    "mongoose": "^6.3.2"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
   }
 }
