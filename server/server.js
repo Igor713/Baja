@@ -15,7 +15,7 @@ app.use(express.json())
 // Rota inicial / endpoint
 app.get('/', (req, res) => {
 
-    // Mostrando requisição
+    // Mostrando requisição 
     res.json({ message: 'Teste' })
 })
 
