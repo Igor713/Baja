@@ -25,8 +25,7 @@ app.get('/', (req, res) => {
 
 
 // Criar porta / Conexão com banco de dados
-const DB_USER = 'baja'
-const DB_PASSWORD = encodeURIComponent('GlzpfZkwqbF8kvuu')
+
 
 mongoose
     .connect(
