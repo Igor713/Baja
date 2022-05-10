@@ -1,3 +1,4 @@
+require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
 // Criando a instancia do server
@@ -25,7 +26,8 @@ app.get('/', (req, res) => {
 
 
 // Criar porta / Conexão com banco de dados
-
+const DB_USER = process.env.DB_USER
+const DB_PASSWORD = encodeURIComponent(process.env.DB_PASSWORD)
 
 mongoose
     .connect(
