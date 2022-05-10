@@ -15,15 +15,15 @@ app.use(express.json())
 // Rotas da API
 const expenseRoutes = require('../routes/expenseRoutes')
 
-app.use('/expense', expenseRoutes)
+app.use('/register', expenseRoutes)
 
 // Rota inicial / endpoint
 app.get('/', (req, res) => {
 
+    res.sendFile('index.html')
     // Mostrando requisição 
-    res.json({ message: 'Teste' })
+    // res.json({ message: 'Teste' })
 })
-
 
 // Criar porta / Conexão com banco de dados
 const DB_USER = process.env.DB_USER
