@@ -1,16 +1,21 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
+const bodyParser = require('body-parser')
 // Criando a instancia do server
 const app = express()
 
 // Forma de ler JSON / middlewares
 app.use(
-    express.urlencoded({
+    bodyParser.urlencoded({
         extended: true,
     }),
 )
-app.use(express.json())
+// app.use(express.json())
+
+app.use("/components", express.static('./components'));
+app.use("/assets", express.static('./assets'));
+app.use("/server", express.static('./server'));
 
 // Rotas da API
 const expenseRoutes = require('../routes/expenseRoutes')
@@ -20,7 +25,7 @@ app.use('/register', expenseRoutes)
 // Rota inicial / endpoint
 app.get('/', (req, res) => {
 
-    res.sendFile('index.html')
+    res.sendFile('index.html', { root: '.' })
     // Mostrando requisição 
     // res.json({ message: 'Teste' })
 })
