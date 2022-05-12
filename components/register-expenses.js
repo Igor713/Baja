@@ -127,7 +127,6 @@ class registerExpenses extends HTMLElement {
                 flex-direction: column;
                 background-color: #fff;
                 padding: 20px;
-                border-radius: 6px;
                 box-shadow: 0 5px 5px rgb(0,0,0,0.1);
             }
             .main-form h2 {
@@ -135,14 +134,18 @@ class registerExpenses extends HTMLElement {
                 padding-bottom: 10px;
             }
             .main-form input {
-                border: 1px solid #393E46;
-                border-radius: 4px;
+                border: none;
+                border-bottom: 1px solid #393E46;
                 margin-bottom: 10px;
-                padding: 4px;
+            }
+
+            .main-form input:focus {
+                outline: none;
             }
 
             .main-form label {
                 font-size: 14px;
+                margin-bottom: 10px;
             }
 
             .main-form .submit-button {
@@ -150,8 +153,7 @@ class registerExpenses extends HTMLElement {
                 border: none;
                 background-color: #B55400;
                 color: #fff;
-                padding: 8px;
-                border-radius: 4px;
+                padding: 10px;
                 transition: 0.5s;
             }
             .main-form .submit-button:hover {
