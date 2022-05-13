@@ -80,6 +80,9 @@ class customMenu extends HTMLElement {
                 background-color: #393E46;
                 transition: all 0.5s;
             }
+            .nav .nav-link:active {
+                background-color: #393E46;
+            }
         `
 
         return style
