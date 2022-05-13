@@ -8,6 +8,7 @@ class registerExpenses extends HTMLElement {
     }
 
     build() {
+
         const shadow = this.attachShadow({ mode: 'open' })
         shadow.appendChild(this.styles())
 
@@ -42,7 +43,7 @@ class registerExpenses extends HTMLElement {
 
     createForm() {
         const form = document.createElement('form')
-        form.setAttribute('action', '/register')
+        form.setAttribute('action', '/')
         form.setAttribute('method', 'POST')
         form.setAttribute('id', 'form-expenses')
         form.setAttribute('class', 'main-form')

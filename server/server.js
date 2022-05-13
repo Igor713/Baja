@@ -16,6 +16,7 @@ app.use(
 app.use("/components", express.static('./components'));
 app.use("/assets", express.static('./assets'));
 app.use("/server", express.static('./server'));
+app.use("/index", express.static('./'));
 
 // Rotas da API
 const expenseRoutes = require('../routes/expenseRoutes')
