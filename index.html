@@ -25,12 +25,24 @@
             content.innerHTML = `<custom-brand></custom-brand>`
         }   
     </script>
+
     <script src="components/custom-menu.js"></script>
     <script src="components/register-expenses.js"></script>
     <script src="components/custom-brand.js"></script>
     <script src="components/list-expenses.js"></script>
     <script src="server/server.js"></script>
-    <script src="index.js"></script>
+
+    <script>
+        fetch("http://localhost:3000/expense", { mode: "no-cors" })
+            .then(response => response.json()) // retorna uma promise
+            .then(result => {
+                console.log(result);
+            })
+            .catch(err => {
+                // trata se alguma das promises falhar
+                console.log('Failed retrieving information', err);
+            }); 
+    </script>
 </body>
 
 </html>

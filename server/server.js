@@ -1,34 +1,35 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-const bodyParser = require('body-parser')
+// const bodyParser = require('body-parser')
 // Criando a instancia do server
 const app = express()
 
 // Forma de ler JSON / middlewares
 app.use(
-    bodyParser.urlencoded({
+    express.urlencoded({
         extended: true,
     }),
 )
-// app.use(express.json())
+app.use(express.json())
 
-app.use("/components", express.static('./components'));
-app.use("/assets", express.static('./assets'));
-app.use("/server", express.static('./server'));
-app.use("/index", express.static('./'));
+// app.use("/components", express.static('./components'));
+// app.use("/assets", express.static('./assets'));
+// app.use("/server", express.static('./server'));
+// app.use("/routes", express.static('./routes'));
+
 
 // Rotas da API
 const expenseRoutes = require('../routes/expenseRoutes')
 
-app.use('/register', expenseRoutes)
+app.use('/expense', expenseRoutes)
 
 // Rota inicial / endpoint
 app.get('/', (req, res) => {
 
-    res.sendFile('index.html', { root: '.' })
+    // res.sendFile('index.html', { root: '.' })
     // Mostrando requisição 
-    // res.json({ message: 'Teste' })
+    res.json({ message: 'Teste' })
 })
 
 // Criar porta / Conexão com banco de dados
