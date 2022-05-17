@@ -1,8 +1,7 @@
 require('dotenv').config()
 const express = require('express')
 const mongoose = require('mongoose')
-// const bodyParser = require('body-parser')
-// Criando a instancia do server
+const cors = require('cors')
 const app = express()
 
 // Forma de ler JSON / middlewares
@@ -13,11 +12,12 @@ app.use(
 )
 app.use(express.json())
 
-// app.use("/components", express.static('./components'));
-// app.use("/assets", express.static('./assets'));
-// app.use("/server", express.static('./server'));
-// app.use("/routes", express.static('./routes'));
+app.use((req, res, next) => {
 
+    res.header('Access-Control-Allow-Origin', '*')
+    app.use(cors())
+    next()
+})
 
 // Rotas da API
 const expenseRoutes = require('../routes/expenseRoutes')
@@ -27,9 +27,9 @@ app.use('/expense', expenseRoutes)
 // Rota inicial / endpoint
 app.get('/', (req, res) => {
 
-    // res.sendFile('index.html', { root: '.' })
-    // Mostrando requisição 
-    res.json({ message: 'Teste' })
+    res.header('access-Control-Allow-Origin', '*')
+    app.use(cors())
+    res.json({ message: 'Rodando' })
 })
 
 // Criar porta / Conexão com banco de dados
