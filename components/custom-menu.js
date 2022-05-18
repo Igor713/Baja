@@ -45,6 +45,7 @@ class customMenu extends HTMLElement {
             }
         ]
         const createLink = (_, id) => {
+
             const link = document.createElement('a')
             link.classList.add('nav-link')
             link.setAttribute('href', links[id].url)
