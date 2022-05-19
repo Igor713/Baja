@@ -20,8 +20,10 @@ class customMenu extends HTMLElement {
     }
 
     createNavMenu() {
+
         const nav = document.createElement('nav')
         nav.classList.add('nav', 'flex-column')
+
         return nav
     }
 
