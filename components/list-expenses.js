@@ -13,10 +13,10 @@ class listExpenses extends HTMLElement {
         shadow.appendChild(this.styles())
 
         const section = this.createSectionList()
-        const cards = this.createCards()
+        const cardSection = this.createCards()
 
         shadow.appendChild(section)
-        cards.forEach(card => section.appendChild(card))
+        section.appendChild(cardSection)
     }
 
     createSectionList() {
@@ -29,31 +29,63 @@ class listExpenses extends HTMLElement {
 
     createCards() {
 
+        const cardSection = document.createElement('main')
+
         fetch("http://localhost:3000/expense")
             .then(response => response.json())
-            .then(jsonBody => {
+            .then(data => {
 
-                console.log(jsonBody)
-                return jsonBody
+                data.map((item) => {
+                    console.log(item)
+
+                    const card = document.createElement('div')
+                    card.classList.add('card')
+
+                    const name = document.createElement('div')
+                    name.classList.add('name')
+                    name.innerHTML = item.name
+                    card.appendChild(name)
+
+                    const price = document.createElement('div')
+                    price.classList.add('price')
+                    price.innerHTML = item.price
+                    card.appendChild(price)
+
+                    const experationDay = document.createElement('div')
+                    experationDay.classList.add('experation-day')
+                    experationDay.innerHTML = item.price
+                    card.appendChild(experationDay)
+
+                    cardSection.appendChild(card)
+                })
             })
             .catch(err => console.log(err))
 
-        const createCards = (_, id) => {
-
-            const card = document.createElement('div')
-            card.classList.add('card')
-            card.innerHTML = jsonBody[id].name
-
-            return card
-        }
-
-        return Array.from({ length: jsonBody.length }, createCards)
+        return cardSection
     }
 
     styles() {
 
         const style = document.createElement('style')
-        style.textContent = ``
+        style.textContent = `
+
+            .list {
+                padding: 15px;
+                width: 100%;
+            }
+
+            .list main {
+                width: 100%;
+            }
+
+            .list main .card {
+                width: 100%;
+                padding: 10px;
+                margin: 10px;
+                background-color: #fff;
+            }
+
+        `
 
         return style
     }

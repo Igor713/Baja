@@ -28,6 +28,7 @@ class customMenu extends HTMLElement {
     }
 
     createLinks() {
+
         const links = [
             {
                 label: 'Home',
@@ -83,7 +84,7 @@ class customMenu extends HTMLElement {
                 background-color: #393E46;
                 transition: all 0.5s;
             }
-            .nav .nav-link:active {
+            .nav .nav-link:focus {
                 background-color: #393E46;
             }
         `
