@@ -16,7 +16,6 @@ class customMenu extends HTMLElement {
 
         shadow.appendChild(nav)
         links.forEach(link => nav.appendChild(link))
-
     }
 
     createNavMenu() {

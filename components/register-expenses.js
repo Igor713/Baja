@@ -43,8 +43,8 @@ class registerExpenses extends HTMLElement {
 
     createForm() {
         const form = document.createElement('form')
-        form.setAttribute('action', '/')
-        form.setAttribute('method', 'POST')
+        // form.setAttribute('action', '/')
+        // form.setAttribute('method', 'POST')
         form.setAttribute('id', 'form-expenses')
         form.setAttribute('class', 'main-form')
 
@@ -113,10 +113,45 @@ class registerExpenses extends HTMLElement {
     createRegisterButton() {
         const registerButton = document.createElement('button')
         registerButton.setAttribute('type', 'submit')
+        registerButton.setAttribute('id', 'register-expense-submit')
         registerButton.setAttribute('class', 'submit-button')
         registerButton.innerHTML = "Cadastrar"
 
         return registerButton
+    }
+
+    getValueExpense() {
+
+        const expenseName = document.getElementById('name')
+        const expensePrice = document.getElementById('price')
+        const expenseExperationDay = document.getElementById('experation-day')
+
+        const expenseElement = {
+
+            nome: expenseName.value,
+            price: expensePrice.value,
+            experationDay: expenseExperationDay.value
+        }
+    }
+
+    sendExpense() {
+        console.log("Entrou na função")
+        let button = document.getElementById('register-expense-submit')
+
+        button.addEventListener('click', (e) => {
+
+            e.preventDefault()
+            const init = {
+
+                method: 'POST',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify(expenseElement)
+            }
+
+            fetch('http://localhost:3000', init)
+        })
     }
 
     styles() {
@@ -129,6 +164,7 @@ class registerExpenses extends HTMLElement {
                 background-color: #fff;
                 padding: 20px;
                 box-shadow: 0 5px 5px rgb(0,0,0,0.1);
+                max-width: 500px;
             }
             .main-form h2 {
                 margin: 0;
