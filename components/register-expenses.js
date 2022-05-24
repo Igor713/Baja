@@ -45,8 +45,7 @@ class registerExpenses extends HTMLElement {
         const form = document.createElement('form')
         // form.setAttribute('action', '/')
         // form.setAttribute('method', 'POST')
-        form.setAttribute('id', 'form-expenses')
-        form.setAttribute('class', 'main-form')
+        form.setAttribute('id', 'expense-form')
 
         return form
     }
@@ -61,8 +60,8 @@ class registerExpenses extends HTMLElement {
 
     createLabelName() {
         const labelName = document.createElement('label')
-        labelName.setAttribute('for', 'name')
-        labelName.innerHTML = 'Nome'
+        labelName.setAttribute('for', 'expense-name')
+        labelName.innerHTML = 'Nome da despesa'
 
         return labelName
     }
@@ -70,15 +69,15 @@ class registerExpenses extends HTMLElement {
     createInputName() {
         const inputName = document.createElement('input')
         inputName.setAttribute('type', 'text')
-        inputName.setAttribute('name', 'name')
-        inputName.setAttribute('id', 'name')
+        inputName.setAttribute('name', 'expense-name')
+        inputName.setAttribute('id', 'expense-name')
 
         return inputName
     }
 
     createLabelPrice() {
         const labelPrice = document.createElement('label')
-        labelPrice.setAttribute('for', 'price')
+        labelPrice.setAttribute('for', 'expense-price')
         labelPrice.innerHTML = 'Valor'
 
         return labelPrice
@@ -87,15 +86,15 @@ class registerExpenses extends HTMLElement {
     createInputPrice() {
         const inputPrice = document.createElement('input')
         inputPrice.setAttribute('type', 'text')
-        inputPrice.setAttribute('name', 'price')
-        inputPrice.setAttribute('id', 'price')
+        inputPrice.setAttribute('name', 'expense-price')
+        inputPrice.setAttribute('id', 'expense-price')
 
         return inputPrice
     }
 
     createLabelExperationDay() {
         const labelExperationDay = document.createElement('label')
-        labelExperationDay.setAttribute('for', 'experation-day')
+        labelExperationDay.setAttribute('for', 'expense-experation-day')
         labelExperationDay.innerHTML = 'Dia de vencimento'
 
         return labelExperationDay
@@ -104,8 +103,8 @@ class registerExpenses extends HTMLElement {
     createInputExperationDay() {
         const inputExperationDay = document.createElement('input')
         inputExperationDay.setAttribute('type', 'text')
-        inputExperationDay.setAttribute('name', 'experationDay')
-        inputExperationDay.setAttribute('id', 'expiration-day')
+        inputExperationDay.setAttribute('name', 'expense-experationDay')
+        inputExperationDay.setAttribute('id', 'expense-expiration-day')
 
         return inputExperationDay
     }
@@ -158,7 +157,7 @@ class registerExpenses extends HTMLElement {
 
         const style = document.createElement('style')
         style.textContent = `
-            .main-form {
+            #expense-form {
                 display: flex;
                 flex-direction: column;
                 background-color: #fff;
@@ -166,26 +165,26 @@ class registerExpenses extends HTMLElement {
                 box-shadow: 0 5px 5px rgb(0,0,0,0.1);
                 max-width: 500px;
             }
-            .main-form h2 {
+            #expense-form h2 {
                 margin: 0;
                 padding-bottom: 10px;
             }
-            .main-form input {
+            #expense-form input {
                 border: none;
                 border-bottom: 1px solid #393E46;
                 margin-bottom: 10px;
             }
 
-            .main-form input:focus {
+            #expense-form input:focus {
                 outline: none;
             }
 
-            .main-form label {
+            #expense-form label {
                 font-size: 14px;
                 margin-bottom: 10px;
             }
 
-            .main-form .submit-button {
+            #expense-form .submit-button {
                 margin-top: 10px;
                 border: none;
                 background-color: #B55400;
@@ -193,7 +192,7 @@ class registerExpenses extends HTMLElement {
                 padding: 10px;
                 transition: 0.5s;
             }
-            .main-form .submit-button:hover {
+            #expense-form .submit-button:hover {
                 background-color: #d1711e;
                 transition: 0.5s;
             }
