@@ -26,7 +26,9 @@
     "express": "^4.18.1",
     "gulp": "^4.0.2",
     "gulp-sass": "^5.1.0",
-    "mongoose": "^6.3.2"
+    "mongoose": "^6.3.2",
+    "node-sass": "^7.0.1",
+    "sass": "^1.52.1"
   },
   "devDependencies": {
     "nodemon": "^2.0.16"

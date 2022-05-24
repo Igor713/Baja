@@ -71,15 +71,15 @@ class listExpenses extends HTMLElement {
 
             .list {
                 padding: 15px;
-                width: 100%;
             }
 
             .list main {
                 width: 100%;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
             }
 
             .list main .card {
-                width: 100%;
                 padding: 10px;
                 margin: 10px;
                 background-color: #fff;
