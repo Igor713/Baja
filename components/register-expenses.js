@@ -43,7 +43,7 @@ class registerExpenses extends HTMLElement {
 
     createForm() {
         const form = document.createElement('form')
-        // form.setAttribute('action', '/')
+        // form.setAttribute('action', '/expense')
         // form.setAttribute('method', 'POST')
         form.setAttribute('id', 'expense-form')
 
@@ -110,47 +110,13 @@ class registerExpenses extends HTMLElement {
     }
 
     createRegisterButton() {
-        const registerButton = document.createElement('button')
+        const registerButton = document.createElement('input')
         registerButton.setAttribute('type', 'submit')
-        registerButton.setAttribute('id', 'register-expense-submit')
+        registerButton.setAttribute('value', 'Registrar')
         registerButton.setAttribute('class', 'submit-button')
         registerButton.innerHTML = "Cadastrar"
 
         return registerButton
-    }
-
-    getValueExpense() {
-
-        const expenseName = document.getElementById('name')
-        const expensePrice = document.getElementById('price')
-        const expenseExperationDay = document.getElementById('experation-day')
-
-        const expenseElement = {
-
-            nome: expenseName.value,
-            price: expensePrice.value,
-            experationDay: expenseExperationDay.value
-        }
-    }
-
-    sendExpense() {
-        console.log("Entrou na função")
-        let button = document.getElementById('register-expense-submit')
-
-        button.addEventListener('click', (e) => {
-
-            e.preventDefault()
-            const init = {
-
-                method: 'POST',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(expenseElement)
-            }
-
-            fetch('http://localhost:3000', init)
-        })
     }
 
     styles() {

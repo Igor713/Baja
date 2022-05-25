@@ -36,7 +36,6 @@ class listExpenses extends HTMLElement {
             .then(data => {
 
                 data.map((item) => {
-                    console.log(item)
 
                     const card = document.createElement('div')
                     card.classList.add('card')

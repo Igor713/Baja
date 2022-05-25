@@ -26,6 +26,42 @@
         }   
     </script>
 
+    <script>
+        // const expenseName = document.getElementById('name')
+        // const expensePrice = document.getElementById('price')
+        // const expenseExperationDay = document.getElementById('experation-day')
+
+        // const expenseElement = {
+
+        //     nome: expenseName.value,
+        //     price: expensePrice.value,
+        //     experationDay: expenseExperationDay.value
+        // }
+
+        window.addEventListener('load', function () {
+
+            let formData = document.getElementById('expense-form')
+
+            console.log(formData)
+
+            formData.addEventListener('submit', (e) => {
+
+                e.preventDefault()
+                alert('Deu certo')
+                // const init = {
+
+                //     method: 'POST',
+                //     headers: {
+                //         "Content-Type": 'expense/json'
+                //     },
+                //     body: JSON.stringify(expenseElement)
+                // }
+
+                // fetch('http://localhost:3000', init)
+            })
+        })
+    </script>
+
     <script src="components/custom-menu.js"></script>
     <script src="components/register-expenses.js"></script>
     <script src="components/custom-brand.js"></script>
