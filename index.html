@@ -27,39 +27,43 @@
     </script>
 
     <script>
-        // const expenseName = document.getElementById('name')
-        // const expensePrice = document.getElementById('price')
-        // const expenseExperationDay = document.getElementById('experation-day')
+        setInterval(() => {
 
-        // const expenseElement = {
+            const formData = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-form')
 
-        //     nome: expenseName.value,
-        //     price: expensePrice.value,
-        //     experationDay: expenseExperationDay.value
-        // }
+            if (formData) {
 
-        window.addEventListener('load', function () {
+                formData.addEventListener('submit', (e) => {
 
-            let formData = document.getElementById('expense-form')
+                    e.preventDefault()
 
-            console.log(formData)
+                    const expenseName = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-name')
+                    const expensePrice = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
+                    const expenseExperationDay = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-experation-day')
 
-            formData.addEventListener('submit', (e) => {
+                    console.log(expenseName)
 
-                e.preventDefault()
-                alert('Deu certo')
-                // const init = {
+                    const expenseElement = {
 
-                //     method: 'POST',
-                //     headers: {
-                //         "Content-Type": 'expense/json'
-                //     },
-                //     body: JSON.stringify(expenseElement)
-                // }
+                        nome: expenseName.value,
+                        price: expensePrice.value,
+                        experationDay: expenseExperationDay.value
+                    }
 
-                // fetch('http://localhost:3000', init)
-            })
-        })
+                    const init = {
+
+                        method: 'POST',
+                        headers: {
+                            "Content-Type": 'application/json'
+                        },
+                        body: JSON.stringify(expenseElement)
+                    }
+
+                    fetch('http://localhost:3000/expense', init)
+                })
+            }
+        }, 2000)
+
     </script>
 
     <script src="components/custom-menu.js"></script>

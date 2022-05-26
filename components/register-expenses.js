@@ -104,7 +104,7 @@ class registerExpenses extends HTMLElement {
         const inputExperationDay = document.createElement('input')
         inputExperationDay.setAttribute('type', 'text')
         inputExperationDay.setAttribute('name', 'expense-experationDay')
-        inputExperationDay.setAttribute('id', 'expense-expiration-day')
+        inputExperationDay.setAttribute('id', 'expense-experation-day')
 
         return inputExperationDay
     }
