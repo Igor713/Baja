@@ -41,11 +41,9 @@
                     const expensePrice = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
                     const expenseExperationDay = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-experation-day')
 
-                    console.log(expenseName)
-
                     const expenseElement = {
 
-                        nome: expenseName.value,
+                        name: expenseName.value,
                         price: expensePrice.value,
                         experationDay: expenseExperationDay.value
                     }
@@ -62,7 +60,7 @@
                     fetch('http://localhost:3000/expense', init)
                 })
             }
-        }, 2000)
+        }, 4000)
 
     </script>
 
