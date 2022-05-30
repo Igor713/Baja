@@ -15,6 +15,10 @@ app.use(express.json())
 app.use((req, res, next) => {
 
     res.header('Access-Control-Allow-Origin', '*')
+    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
+    res.header('Access-Control-Request-Headers', 'Content-Type, Authorization')
+    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
+    res.header("Access-Control-Allow-Credentials", "false")
     app.use(cors())
     next()
 })
@@ -27,11 +31,6 @@ app.use('/expense', expenseRoutes)
 // Rota inicial / endpoint
 app.get('/', (req, res) => {
 
-    res.header('Access-Control-Allow-Origin', '*')
-    res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization')
-    res.header('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE')
-    res.header("Access-Control-Allow-Credentials", "true");
-    app.use(cors())
     res.json({ message: 'Rodando' })
 })
 

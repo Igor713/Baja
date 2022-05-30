@@ -26,49 +26,12 @@
         }   
     </script>
 
-    <script>
-        setInterval(() => {
-
-            const formData = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-form')
-
-            if (formData) {
-
-                formData.addEventListener('submit', (e) => {
-
-                    e.preventDefault()
-
-                    const expenseName = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-name')
-                    const expensePrice = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
-                    const expenseExperationDay = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-experation-day')
-
-                    const expenseElement = {
-
-                        name: expenseName.value,
-                        price: expensePrice.value,
-                        experationDay: expenseExperationDay.value
-                    }
-
-                    const init = {
-
-                        method: 'POST',
-                        headers: {
-                            "Content-Type": 'application/json'
-                        },
-                        body: JSON.stringify(expenseElement)
-                    }
-
-                    fetch('http://localhost:3000/expense', init)
-                })
-            }
-        }, 4000)
-
-    </script>
-
     <script src="components/custom-menu.js"></script>
     <script src="components/register-expenses.js"></script>
     <script src="components/custom-brand.js"></script>
     <script src="components/list-expenses.js"></script>
     <script src="server/server.js"></script>
+    <script src="assets/js/post-item.js"></script>
 </body>
 
 </html>
