@@ -32,8 +32,8 @@ if (formData) {
                     throw Error(data.status)
                 }
                 return data.json()
-            }).then(expenseElement => {
-                console.log(expenseElement)
+                // }).then(expenseElement => {
+                //     console.log(expenseElement)
             }).catch(e => {
                 console.log(e);
             });

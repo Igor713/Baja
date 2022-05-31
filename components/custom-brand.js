@@ -13,11 +13,22 @@ class customBrand extends HTMLElement {
         shadow.appendChild(this.styles())
 
         const brand = this.createBrand()
+        const wrapper = this.createWrapper()
 
-        shadow.appendChild(brand)
+        wrapper.appendChild(brand)
+        shadow.appendChild(wrapper)
+    }
+
+    createWrapper() {
+
+        const wrapper = document.createElement('div')
+        wrapper.setAttribute('class', 'brand-wrapper')
+
+        return wrapper
     }
 
     createBrand() {
+
         const brand = document.createElement('img')
         brand.setAttribute('src', 'assets/image/Baja logo.svg')
         brand.setAttribute('alt', 'baja logo')
@@ -26,8 +37,17 @@ class customBrand extends HTMLElement {
     }
 
     styles() {
+
         const style = document.createElement('style')
-        style.textContent = ``
+        style.textContent = `
+
+            .brand-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+            }
+        `
 
         return style
     }

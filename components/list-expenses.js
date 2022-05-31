@@ -38,6 +38,7 @@ class listExpenses extends HTMLElement {
                 data.map((item) => {
 
                     const card = document.createElement('div')
+                    card.setAttribute('expense-id', item._id)
                     card.classList.add('card')
 
                     const name = document.createElement('div')
@@ -54,6 +55,13 @@ class listExpenses extends HTMLElement {
                     experationDay.classList.add('experation-day')
                     experationDay.innerHTML = item.price
                     card.appendChild(experationDay)
+
+                    const deleteButton = document.createElement('input')
+                    deleteButton.setAttribute('id', 'delete-expense')
+                    deleteButton.classList.add('delete-button')
+                    deleteButton.setAttribute('type', 'button')
+                    deleteButton.setAttribute('value', 'Excluir')
+                    card.appendChild(deleteButton)
 
                     cardSection.appendChild(card)
                 })
