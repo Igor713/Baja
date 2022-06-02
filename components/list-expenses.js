@@ -61,6 +61,7 @@ class listExpenses extends HTMLElement {
                     deleteButton.classList.add('delete-button')
                     deleteButton.setAttribute('type', 'button')
                     deleteButton.setAttribute('value', 'Excluir')
+                    deleteButton.addEventListener('click', this.deleteExpense)
                     card.appendChild(deleteButton)
 
                     cardSection.appendChild(card)
@@ -69,6 +70,21 @@ class listExpenses extends HTMLElement {
             .catch(err => console.log(err))
 
         return cardSection
+    }
+
+    deleteExpense(e) {
+
+        const expenseId = e.currentTarget.parentElement.getAttribute('expense-id')
+
+        fetch(`http://localhost:3000/expense/${expenseId}`, {
+            method: 'DELETE'
+        })
+            .then(response => response.json())
+            .then(data => {
+
+                console.log(data)
+            })
+            .catch(err => console.log(err))
     }
 
     styles() {
