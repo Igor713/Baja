@@ -3,8 +3,8 @@ const mongoose = require('mongoose')
 const Expense = mongoose.model('Expense', {
 
     name: String,
-    price: Number,
-    experationDay: Number,
+    price: String,
+    experationDay: String,
 })
 
 module.exports = Expense

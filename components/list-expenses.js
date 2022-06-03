@@ -39,30 +39,39 @@ class listExpenses extends HTMLElement {
 
                     const card = document.createElement('div')
                     card.setAttribute('expense-id', item._id)
-                    card.classList.add('card')
+                    card.classList.add('expense-card')
 
-                    const name = document.createElement('div')
-                    name.classList.add('name')
-                    name.innerHTML = item.name
+                    const name = document.createElement('input')
+                    name.setAttribute('id', 'expense-name')
+                    name.setAttribute('disabled', '')
+                    name.setAttribute('value', item.name)
                     card.appendChild(name)
 
-                    const price = document.createElement('div')
-                    price.classList.add('price')
-                    price.innerHTML = item.price
+                    const price = document.createElement('input')
+                    price.setAttribute('id', 'expense-price')
+                    price.setAttribute('disabled', '')
+                    price.setAttribute('value', item.price)
                     card.appendChild(price)
 
-                    const experationDay = document.createElement('div')
-                    experationDay.classList.add('experation-day')
-                    experationDay.innerHTML = item.price
+                    const experationDay = document.createElement('input')
+                    experationDay.setAttribute('id', 'experation-day')
+                    experationDay.setAttribute('disabled', '')
+                    experationDay.setAttribute('value', item.experationDay)
                     card.appendChild(experationDay)
 
                     const deleteButton = document.createElement('input')
                     deleteButton.setAttribute('id', 'delete-expense')
-                    deleteButton.classList.add('delete-button')
                     deleteButton.setAttribute('type', 'button')
                     deleteButton.setAttribute('value', 'Excluir')
                     deleteButton.addEventListener('click', this.deleteExpense)
                     card.appendChild(deleteButton)
+
+                    const editButton = document.createElement('input')
+                    editButton.setAttribute('id', 'edit-expense')
+                    editButton.setAttribute('type', 'button')
+                    editButton.setAttribute('value', 'Editar')
+                    editButton.addEventListener('click', this.editExpense)
+                    card.appendChild(editButton)
 
                     cardSection.appendChild(card)
                 })
@@ -85,6 +94,11 @@ class listExpenses extends HTMLElement {
                 console.log(data)
             })
             .catch(err => console.log(err))
+    }
+
+    editExpense(e) {
+
+
     }
 
     styles() {
