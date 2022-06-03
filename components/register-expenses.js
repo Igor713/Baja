@@ -12,8 +12,9 @@ class registerExpenses extends HTMLElement {
         const shadow = this.attachShadow({ mode: 'open' })
         shadow.appendChild(this.styles())
 
+        const formWrapper = this.createFormWrapper()
+        shadow.appendChild(formWrapper)
         const form = this.createForm()
-        shadow.appendChild(form)
         const title = this.createTitle()
 
         const labelName = this.createLabelName()
@@ -27,6 +28,7 @@ class registerExpenses extends HTMLElement {
 
         const button = this.createRegisterButton()
 
+        formWrapper.appendChild(form)
         form.appendChild(title)
 
         form.appendChild(labelName)
@@ -41,7 +43,16 @@ class registerExpenses extends HTMLElement {
         form.appendChild(button)
     }
 
+    createFormWrapper() {
+
+        const formWrapper = document.createElement('div')
+        formWrapper.setAttribute('class', 'form-wrapper')
+
+        return formWrapper
+    }
+
     createForm() {
+
         const form = document.createElement('form')
         // form.setAttribute('action', '/expense')
         // form.setAttribute('method', 'POST')
@@ -123,6 +134,14 @@ class registerExpenses extends HTMLElement {
 
         const style = document.createElement('style')
         style.textContent = `
+            
+            .form-wrapper {
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                min-height: 100vh;
+                height: 100%;
+            }
             #expense-form {
                 display: flex;
                 flex-direction: column;
