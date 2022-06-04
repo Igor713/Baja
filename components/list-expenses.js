@@ -86,7 +86,7 @@ class listExpenses extends HTMLElement {
         const expenseId = e.currentTarget.parentElement.getAttribute('expense-id')
 
         fetch(`http://localhost:3000/expense/${expenseId}`, {
-            method: 'DELETE'
+            method: 'DELETE',
         })
             .then(response => response.json())
             .then(data => {
@@ -98,7 +98,51 @@ class listExpenses extends HTMLElement {
 
     editExpense(e) {
 
+        e.currentTarget.parentElement.querySelector('#expense-name').removeAttribute('disabled')
+        e.currentTarget.parentElement.querySelector('#expense-price').removeAttribute('disabled')
+        e.currentTarget.parentElement.querySelector('#experation-day').removeAttribute('disabled')
 
+        e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('value', 'Salvar')
+
+        const safeid = e.currentTarget.parentElement.getAttribute('expense-id')
+        const safeEdit = e.currentTarget.parentElement.querySelector('#edit-expense')
+
+        console.log(safeid)
+
+        safeEdit.addEventListener('click', (e) => {
+
+            const expenseName = e.currentTarget.parentElement.querySelector('#expense-name')
+            const expensePrice = e.currentTarget.parentElement.querySelector('#expense-price')
+            const expenseExperationDay = e.currentTarget.parentElement.querySelector('#experation-day')
+
+            const expenseElement = {
+
+                name: expenseName.value,
+                price: expensePrice.value,
+                experationDay: expenseExperationDay.value
+            }
+
+            const init = {
+
+                method: 'PUT',
+                headers: {
+                    "Content-Type": 'application/json'
+                },
+                body: JSON.stringify(expenseElement)
+            }
+
+            console.log(expenseElement)
+
+            if (safeEdit.value === 'Salvar') {
+
+                fetch(`http://localhost:3000/expense/${safeid}`, init)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data)
+                    })
+                    .catch(err => console.log(err))
+            }
+        }, false)
     }
 
     styles() {
