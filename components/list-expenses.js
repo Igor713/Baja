@@ -59,19 +59,23 @@ class listExpenses extends HTMLElement {
                     experationDay.setAttribute('value', item.experationDay)
                     card.appendChild(experationDay)
 
+                    const wrapperbuttons = document.createElement('div')
+                    wrapperbuttons.classList.add('wrapper-buttons')
+                    card.appendChild(wrapperbuttons)
+
                     const deleteButton = document.createElement('input')
                     deleteButton.setAttribute('id', 'delete-expense')
                     deleteButton.setAttribute('type', 'button')
                     deleteButton.setAttribute('value', 'Excluir')
                     deleteButton.addEventListener('click', this.deleteExpense)
-                    card.appendChild(deleteButton)
+                    wrapperbuttons.appendChild(deleteButton)
 
                     const editButton = document.createElement('input')
                     editButton.setAttribute('id', 'edit-expense')
                     editButton.setAttribute('type', 'button')
                     editButton.setAttribute('value', 'Editar')
                     editButton.addEventListener('click', this.editExpense)
-                    card.appendChild(editButton)
+                    wrapperbuttons.appendChild(editButton)
 
                     cardSection.appendChild(card)
                 })
@@ -124,7 +128,7 @@ class listExpenses extends HTMLElement {
 
             const init = {
 
-                method: 'PUT',
+                method: 'PATCH',
                 headers: {
                     "Content-Type": 'application/json'
                 },
@@ -156,14 +160,24 @@ class listExpenses extends HTMLElement {
 
             .list main {
                 width: 100%;
-                display: grid;
-                grid-template-columns: 1fr 1fr 1fr 1fr;
+                display: flex;
             }
 
-            .list main .card {
+            .list main .expense-card {
                 padding: 10px;
                 margin: 10px;
                 background-color: #fff;
+                display: flex;
+                flex-direction: column;
+            }
+            .list main .expense-card input {
+                width: 100%;
+                margin-bottom: 10px;
+                border-bottom: 1px solid #ccc !important;
+                background-color: transparent;
+                padding: 5px;
+                font-size: 18px;
+                border: none;
             }
 
         `
