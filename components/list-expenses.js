@@ -50,7 +50,7 @@ class listExpenses extends HTMLElement {
                     const price = document.createElement('input')
                     price.setAttribute('id', 'expense-price')
                     price.setAttribute('disabled', '')
-                    price.setAttribute('value', item.price)
+                    price.setAttribute('value', 'R$ ' + item.price)
                     card.appendChild(price)
 
                     const experationDay = document.createElement('input')
@@ -59,23 +59,19 @@ class listExpenses extends HTMLElement {
                     experationDay.setAttribute('value', item.experationDay)
                     card.appendChild(experationDay)
 
-                    const wrapperbuttons = document.createElement('div')
-                    wrapperbuttons.classList.add('wrapper-buttons')
-                    card.appendChild(wrapperbuttons)
+                    const editButton = document.createElement('input')
+                    editButton.setAttribute('id', 'edit-expense')
+                    editButton.setAttribute('type', 'button')
+                    editButton.setAttribute('value', 'Editar')
+                    editButton.addEventListener('click', this.editExpense)
+                    card.appendChild(editButton)
 
                     const deleteButton = document.createElement('input')
                     deleteButton.setAttribute('id', 'delete-expense')
                     deleteButton.setAttribute('type', 'button')
                     deleteButton.setAttribute('value', 'Excluir')
                     deleteButton.addEventListener('click', this.deleteExpense)
-                    wrapperbuttons.appendChild(deleteButton)
-
-                    const editButton = document.createElement('input')
-                    editButton.setAttribute('id', 'edit-expense')
-                    editButton.setAttribute('type', 'button')
-                    editButton.setAttribute('value', 'Editar')
-                    editButton.addEventListener('click', this.editExpense)
-                    wrapperbuttons.appendChild(editButton)
+                    card.appendChild(deleteButton)
 
                     cardSection.appendChild(card)
                 })
@@ -160,24 +156,58 @@ class listExpenses extends HTMLElement {
 
             .list main {
                 width: 100%;
-                display: flex;
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr 1fr;
             }
 
             .list main .expense-card {
-                padding: 10px;
+                padding: 15px;
                 margin: 10px;
                 background-color: #fff;
                 display: flex;
                 flex-direction: column;
+                border-radius: 5px;
             }
             .list main .expense-card input {
-                width: 100%;
-                margin-bottom: 10px;
-                border-bottom: 1px solid #ccc !important;
-                background-color: transparent;
-                padding: 5px;
-                font-size: 18px;
                 border: none;
+                border-radius: 5px;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
+                margin-bottom: 10px;
+                padding: 10px;
+                font-size: 16px;
+            }
+
+            .list main .expense-card input:hover {
+                background-color: rgba(0, 0, 0, 0.2);
+                transition: 0.5s;
+            }
+
+            .list main .expense-card input:disabled {
+                background-color: rgba(0, 0, 0, 0.10);
+            }
+            .list main .expense-card #edit-expense {
+                background-color: #393E46;
+                color: #fff;
+                transition: 0.3s;
+            }
+
+            .list main .expense-card #edit-expense:hover {
+                background-color: #222831;
+                color: #fff;
+                transition: 0.3s;
+            }
+
+            .list main .expense-card #delete-expense {
+                background-color: #c31e1e;
+                color: #fff;
+                margin: 0;
+                transition: 0.3s;
+            }
+            .list main .expense-card #delete-expense:hover {
+                background-color: #a01919;
+                color: #fff;
+                margin: 0;
+                transition: 0.3s;
             }
 
         `

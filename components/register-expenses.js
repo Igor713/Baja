@@ -64,7 +64,7 @@ class registerExpenses extends HTMLElement {
     createTitle() {
         const title = document.createElement('h2')
         title.setAttribute('class', 'expenses-title')
-        title.innerHTML = 'Cadastrando nova despesa'
+        title.innerHTML = 'Cadastrar nova despesa'
 
         return title
     }
@@ -172,6 +172,10 @@ class registerExpenses extends HTMLElement {
                     }).catch(e => {
                         console.log(e);
                     });
+
+                expenseName.value = ''
+                expensePrice.value = ''
+                expenseExperationDay.value = ''
             })
         }
     }
@@ -189,6 +193,7 @@ class registerExpenses extends HTMLElement {
                 height: 100%;
             }
             #expense-form {
+                border-radius: 5px;
                 display: flex;
                 flex-direction: column;
                 background-color: #fff;
@@ -204,6 +209,7 @@ class registerExpenses extends HTMLElement {
                 border: none;
                 border-bottom: 1px solid #393E46;
                 margin-bottom: 10px;
+                font-size: 16px;
             }
 
             #expense-form input:focus {
@@ -211,12 +217,14 @@ class registerExpenses extends HTMLElement {
             }
 
             #expense-form label {
-                font-size: 14px;
+                font-size: 16px;
                 margin-bottom: 10px;
             }
 
             #expense-form .submit-button {
+                border-radius: 5px;
                 margin-top: 10px;
+                font-size: 16px;
                 border: none;
                 background-color: #B55400;
                 color: #fff;

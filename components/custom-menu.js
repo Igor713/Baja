@@ -78,6 +78,7 @@ class customMenu extends HTMLElement {
                 color: #fff;
                 text-decoration: none;
                 padding: 10px 10px; 
+                font-size: 16px;
             }
             .nav .nav-link:hover {
                 background-color: #393E46;
