@@ -175,6 +175,7 @@ class listExpenses extends HTMLElement {
                 margin-bottom: 10px;
                 padding: 10px;
                 font-size: 16px;
+                font-weight: bold;
             }
 
             .list main .expense-card input:hover {

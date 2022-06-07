@@ -27,8 +27,10 @@ class registerExpenses extends HTMLElement {
         const inputExperationDay = this.createInputExperationDay()
 
         const button = this.createRegisterButton()
+        // const messageSuccess = this.createMessage()
 
         formWrapper.appendChild(form)
+        // formWrapper.appendChild(messageSuccess)
         form.appendChild(title)
 
         form.appendChild(labelName)
@@ -162,16 +164,13 @@ class registerExpenses extends HTMLElement {
                 }
 
                 fetch('http://localhost:3000/expense', init)
-                    .then(data => {
-                        if (!data.ok) {
-                            throw Error(data.status)
-                        }
-                        return data.json()
-                        // }).then(expenseElement => {
-                        //     console.log(expenseElement)
-                    }).catch(e => {
-                        console.log(e);
-                    });
+                    .then(r => r.json())
+
+                    .then(result => {
+                        alert(expenseElement)
+                    }).catch(err => {
+                        console.log(err)
+                    })
 
                 expenseName.value = ''
                 expensePrice.value = ''
@@ -191,6 +190,7 @@ class registerExpenses extends HTMLElement {
                 align-items: center;
                 min-height: 100vh;
                 height: 100%;
+                position: relative;
             }
             #expense-form {
                 border-radius: 5px;
@@ -203,7 +203,6 @@ class registerExpenses extends HTMLElement {
             }
             #expense-form h2 {
                 margin: 0;
-                padding-bottom: 10px;
             }
             #expense-form input {
                 border: none;
@@ -217,8 +216,8 @@ class registerExpenses extends HTMLElement {
             }
 
             #expense-form label {
-                font-size: 16px;
-                margin-bottom: 10px;
+                font-size: 18px;
+                margin-top: 10px;
             }
 
             #expense-form .submit-button {
