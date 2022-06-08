@@ -165,16 +165,17 @@ class registerExpenses extends HTMLElement {
 
                 fetch('http://localhost:3000/expense', init)
                     .then(r => r.json())
-
                     .then(result => {
-                        alert(expenseElement)
+
+                        expenseName.value = ''
+                        expensePrice.value = ''
+                        expenseExperationDay.value = ''
+
+                        alert('Despesa cadastrada com sucesso!')
+
                     }).catch(err => {
                         console.log(err)
                     })
-
-                expenseName.value = ''
-                expensePrice.value = ''
-                expenseExperationDay.value = ''
             })
         }
     }

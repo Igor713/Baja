@@ -22,7 +22,7 @@ class listExpenses extends HTMLElement {
     createSectionList() {
 
         const sectionList = document.createElement('section')
-        sectionList.setAttribute('class', 'list')
+        sectionList.setAttribute('id', 'list')
 
         return sectionList
     }
@@ -92,6 +92,7 @@ class listExpenses extends HTMLElement {
             .then(data => {
 
                 console.log(data)
+                alert('Exclusão realizada com sucesso!')
             })
             .catch(err => console.log(err))
     }
@@ -104,12 +105,10 @@ class listExpenses extends HTMLElement {
 
         e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('value', 'Salvar')
 
-        const safeid = e.currentTarget.parentElement.getAttribute('expense-id')
-        const safeEdit = e.currentTarget.parentElement.querySelector('#edit-expense')
+        const saveId = e.currentTarget.parentElement.getAttribute('expense-id')
+        const saveEdit = e.currentTarget.parentElement.querySelector('#edit-expense')
 
-        console.log(safeid)
-
-        safeEdit.addEventListener('click', (e) => {
+        saveEdit.addEventListener('click', (e) => {
 
             const expenseName = e.currentTarget.parentElement.querySelector('#expense-name')
             const expensePrice = e.currentTarget.parentElement.querySelector('#expense-price')
@@ -131,14 +130,15 @@ class listExpenses extends HTMLElement {
                 body: JSON.stringify(expenseElement)
             }
 
-            console.log(expenseElement)
+            if (saveEdit.value === 'Salvar') {
 
-            if (safeEdit.value === 'Salvar') {
-
-                fetch(`http://localhost:3000/expense/${safeid}`, init)
+                fetch(`http://localhost:3000/expense/${saveId}`, init)
                     .then(response => response.json())
                     .then(data => {
-                        console.log(data)
+
+                        alert('Alteração realizada com sucesso!')
+                        location.reload()
+
                     })
                     .catch(err => console.log(err))
             }
@@ -150,17 +150,17 @@ class listExpenses extends HTMLElement {
         const style = document.createElement('style')
         style.textContent = `
 
-            .list {
+            #list {
                 padding: 15px;
             }
 
-            .list main {
+            #list main {
                 width: 100%;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
             }
 
-            .list main .expense-card {
+            #list main .expense-card {
                 padding: 15px;
                 margin: 10px;
                 background-color: #fff;
@@ -168,7 +168,7 @@ class listExpenses extends HTMLElement {
                 flex-direction: column;
                 border-radius: 5px;
             }
-            .list main .expense-card input {
+            #list main .expense-card input {
                 border: none;
                 border-radius: 5px;
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
@@ -178,33 +178,33 @@ class listExpenses extends HTMLElement {
                 font-weight: bold;
             }
 
-            .list main .expense-card input:hover {
+            #list main .expense-card input:hover {
                 background-color: rgba(0, 0, 0, 0.2);
                 transition: 0.5s;
             }
 
-            .list main .expense-card input:disabled {
+            #list main .expense-card input:disabled {
                 background-color: rgba(0, 0, 0, 0.10);
             }
-            .list main .expense-card #edit-expense {
+            #list main .expense-card #edit-expense {
                 background-color: #393E46;
                 color: #fff;
                 transition: 0.3s;
             }
 
-            .list main .expense-card #edit-expense:hover {
+            #list main .expense-card #edit-expense:hover {
                 background-color: #222831;
                 color: #fff;
                 transition: 0.3s;
             }
 
-            .list main .expense-card #delete-expense {
+            #list main .expense-card #delete-expense {
                 background-color: #c31e1e;
                 color: #fff;
                 margin: 0;
                 transition: 0.3s;
             }
-            .list main .expense-card #delete-expense:hover {
+            #list main .expense-card #delete-expense:hover {
                 background-color: #a01919;
                 color: #fff;
                 margin: 0;
