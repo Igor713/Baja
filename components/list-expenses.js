@@ -112,12 +112,14 @@ class listExpenses extends HTMLElement {
 
             const expenseName = e.currentTarget.parentElement.querySelector('#expense-name')
             const expensePrice = e.currentTarget.parentElement.querySelector('#expense-price')
+            const priceSplit = expensePrice.value
+            const priceArray = priceSplit.split('R$ ')
             const expenseExperationDay = e.currentTarget.parentElement.querySelector('#experation-day')
 
             const expenseElement = {
 
                 name: expenseName.value,
-                price: expensePrice.value,
+                price: priceArray[1],
                 experationDay: expenseExperationDay.value
             }
 
