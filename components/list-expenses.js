@@ -24,6 +24,13 @@ class listExpenses extends HTMLElement {
         const sectionList = document.createElement('section')
         sectionList.setAttribute('id', 'list')
 
+        // if (location.reload) {
+
+        //     const contentLoad = document.getElementById('content')
+        //     console.log(contentLoad)
+        //     contentLoad.innerHTML = localStorage.getItem('lastLink')
+        // }
+
         return sectionList
     }
 

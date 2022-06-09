@@ -67,15 +67,6 @@ class customMenu extends HTMLElement {
 
         localStorage.setItem('lastlink', link)
         e.preventDefault()
-
-        if (window.onload) {
-
-            const contentLoad = document.getElementById('content')
-            console.log(contentLoad)
-            const lastLink = localStorage.getItem('lastLink')
-            console.log(lastLink)
-            contentLoad.innerHTML = lastLink
-        }
     }
 
     styles() {
