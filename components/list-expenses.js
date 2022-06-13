@@ -45,7 +45,7 @@ class listExpenses extends HTMLElement {
                 data.map((item) => {
 
                     const card = document.createElement('div')
-                    card.setAttribute('expense-id', item._id)
+                    card.setAttribute('id', item._id)
                     card.classList.add('expense-card')
 
                     const cancelButton = document.createElement('a')
@@ -109,7 +109,7 @@ class listExpenses extends HTMLElement {
 
     deleteExpense(e) {
 
-        const expenseId = e.currentTarget.parentElement.getAttribute('expense-id')
+        const expenseId = e.currentTarget.parentElement.getAttribute('id')
 
         fetch(`http://localhost:3000/expense/${expenseId}`, {
             method: 'DELETE',
@@ -121,11 +121,15 @@ class listExpenses extends HTMLElement {
                 alert('Exclusão realizada com sucesso!')
             })
             .catch(err => console.log(err))
+
+
+        const cardContent = e.currentTarget.parentElement
+        cardContent.remove()
     }
 
     editExpense(e) {
 
-        const saveId = e.currentTarget.parentElement.getAttribute('expense-id')
+        const saveId = e.currentTarget.parentElement.getAttribute('id')
         const saveButton = e.currentTarget.parentElement.querySelector('#edit-expense')
 
         if (saveButton.value === 'Editar') {

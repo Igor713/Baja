@@ -218,7 +218,7 @@ class registerExpenses extends HTMLElement {
 
             #expense-form label {
                 font-size: 18px;
-                margin-top: 10px;
+                margin: 10px 0;
             }
 
             #expense-form .submit-button {
