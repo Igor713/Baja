@@ -134,8 +134,8 @@ class listExpenses extends HTMLElement {
             e.currentTarget.parentElement.querySelector('#expense-name').removeAttribute('disabled')
             e.currentTarget.parentElement.querySelector('#expense-price').removeAttribute('disabled')
             e.currentTarget.parentElement.querySelector('#experation-day').removeAttribute('disabled')
-
             e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('value', 'Salvar')
+
         } else {
 
             const expenseName = e.currentTarget.parentElement.querySelector('#expense-name')
@@ -169,6 +169,12 @@ class listExpenses extends HTMLElement {
 
                 })
                 .catch(err => console.log(err))
+
+            e.currentTarget.parentElement.querySelector('#expense-name').setAttribute('disabled', '')
+            e.currentTarget.parentElement.querySelector('#expense-price').setAttribute('disabled', '')
+            e.currentTarget.parentElement.querySelector('#experation-day').setAttribute('disabled', '')
+            e.currentTarget.parentElement.querySelector('#cancel-button').removeAttribute('class', 'cancel-button')
+            e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('value', 'Editar')
         }
     }
 
@@ -208,6 +214,7 @@ class listExpenses extends HTMLElement {
                 padding: 2px 9px;
                 color: red;
                 height: 24px;
+                cursor: pointer;
             }
 
             #list main .expense-card .cancel-button {
@@ -236,6 +243,7 @@ class listExpenses extends HTMLElement {
                 background-color: #393E46;
                 color: #fff;
                 transition: 0.3s;
+                cursor: pointer;
             }
 
             #list main .expense-card #edit-expense:hover {
@@ -249,6 +257,7 @@ class listExpenses extends HTMLElement {
                 color: #fff;
                 margin: 0;
                 transition: 0.3s;
+                cursor: pointer;
             }
             #list main .expense-card #delete-expense:hover {
                 background-color: #a01919;

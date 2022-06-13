@@ -230,6 +230,7 @@ class registerExpenses extends HTMLElement {
                 color: #fff;
                 padding: 10px;
                 transition: 0.5s;
+                cursor: pointer;
             }
             #expense-form .submit-button:hover {
                 background-color: #d1711e;
