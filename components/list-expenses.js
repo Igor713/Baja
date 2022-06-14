@@ -67,26 +67,62 @@ class listExpenses extends HTMLElement {
                     price.setAttribute('value', 'R$ ' + item.price)
                     card.appendChild(price)
 
+                    const messageExperation = document.createElement('div')
+                    messageExperation.setAttribute('class', 'message-experation')
+                    messageExperation.innerHTML = 'Vence no dia:'
+                    card.appendChild(messageExperation)
+
                     const experationDay = document.createElement('input')
                     experationDay.setAttribute('id', 'experation-day')
                     experationDay.setAttribute('disabled', '')
                     experationDay.setAttribute('value', item.experationDay)
                     card.appendChild(experationDay)
 
-                    const editButton = document.createElement('input')
+                    const buttonsWrapper = document.createElement('div')
+                    buttonsWrapper.setAttribute('class', 'buttons-wrapper')
+                    card.appendChild(buttonsWrapper)
+
+                    // Botão de salvar
+                    const editButton = document.createElement('button')
                     editButton.setAttribute('id', 'edit-expense')
                     editButton.setAttribute('type', 'button')
                     editButton.setAttribute('value', 'Editar')
                     editButton.addEventListener('click', this.editExpense)
-                    card.appendChild(editButton)
+                    buttonsWrapper.appendChild(editButton)
 
-                    const deleteButton = document.createElement('input')
+                    const editImg = document.createElement('img')
+                    editImg.setAttribute('class', 'edit-img')
+                    editImg.setAttribute('src', 'assets/image/pencil.png')
+                    editImg.setAttribute('alt', 'edit image')
+                    editButton.appendChild(editImg)
+
+                    // Botão de salvar
+                    const saveButton = document.createElement('button')
+                    saveButton.setAttribute('id', 'save-expense')
+                    saveButton.setAttribute('type', 'button')
+                    saveButton.setAttribute('title', 'Salvar')
+                    saveButton.addEventListener('click', this.editExpense)
+                    buttonsWrapper.appendChild(saveButton)
+
+                    const saveImg = document.createElement('img')
+                    saveImg.setAttribute('class', 'edit-img')
+                    saveImg.setAttribute('src', 'assets/image/save.png')
+                    saveImg.setAttribute('alt', 'edit image')
+                    saveButton.appendChild(saveImg)
+
+                    // Botão de delete
+                    const deleteButton = document.createElement('button')
                     deleteButton.setAttribute('id', 'delete-expense')
                     deleteButton.setAttribute('type', 'button')
-                    deleteButton.setAttribute('value', 'Excluir')
                     deleteButton.setAttribute('title', 'Excluir')
                     deleteButton.addEventListener('click', this.deleteExpense)
-                    card.appendChild(deleteButton)
+                    buttonsWrapper.appendChild(deleteButton)
+
+                    const deleteImg = document.createElement('img')
+                    deleteImg.setAttribute('class', 'delete-img')
+                    deleteImg.setAttribute('src', 'assets/image/delete.png')
+                    deleteImg.setAttribute('alt', 'delete image')
+                    deleteButton.appendChild(deleteImg)
 
                     cardSection.appendChild(card)
                 })
@@ -206,6 +242,11 @@ class listExpenses extends HTMLElement {
                 border-radius: 5px;
                 position: relative;
             }
+            #list main .expense-card .buttons-wrapper {
+                display: flex;
+                gap: 15px;
+                margin-top: 10px;
+            }
             #list main .expense-card #cancel-button {
                 position: absolute;
                 display: none;
@@ -223,6 +264,34 @@ class listExpenses extends HTMLElement {
 
             #list main .expense-card .cancel-button {
                 display: block !important;
+            }
+
+            #list main .expense-card #edit-expense,
+            #list main .expense-card #save-expense,
+            #list main .expense-card #delete-expense {
+                border-radius: 16px;
+                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
+                border: none;
+                background-color: #fff;
+                padding: 0.5rem;
+                color: #fff;
+                transition: 0.3s;
+                cursor: pointer;
+            }
+
+            #list main .expense-card #edit-expense:hover,
+            #list main .expense-card #save-expense:hover,
+            #list main .expense-card #delete-expense:hover {
+                box-shadow: 1px 1px 10px rgba(0, 0, 0, 0.3);
+                color: #fff;
+                transition: 0.3s;
+            }
+
+            #list main .expense-card .edit-img, 
+            #list main .expense-card .save-img, 
+            #list main .expense-card .delete-img {
+                width: 20px;
+                height: 20px;
             }
 
             #list main .expense-card input {
@@ -243,33 +312,6 @@ class listExpenses extends HTMLElement {
             #list main .expense-card input:disabled {
                 background-color: rgba(0, 0, 0, 0.10);
             }
-            #list main .expense-card #edit-expense {
-                background-color: #393E46;
-                color: #fff;
-                transition: 0.3s;
-                cursor: pointer;
-            }
-
-            #list main .expense-card #edit-expense:hover {
-                background-color: #222831;
-                color: #fff;
-                transition: 0.3s;
-            }
-
-            #list main .expense-card #delete-expense {
-                background-color: #c31e1e;
-                color: #fff;
-                margin: 0;
-                transition: 0.3s;
-                cursor: pointer;
-            }
-            #list main .expense-card #delete-expense:hover {
-                background-color: #a01919;
-                color: #fff;
-                margin: 0;
-                transition: 0.3s;
-            }
-
         `
 
         return style
