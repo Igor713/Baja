@@ -48,13 +48,6 @@ class listExpenses extends HTMLElement {
                     card.setAttribute('id', item._id)
                     card.classList.add('expense-card')
 
-                    const cancelButton = document.createElement('a')
-                    cancelButton.setAttribute('id', 'cancel-button')
-                    cancelButton.setAttribute('title', 'Cancelar edição')
-                    cancelButton.innerHTML = 'X'
-                    cancelButton.addEventListener('click', this.cancelEdit)
-                    card.appendChild(cancelButton)
-
                     const name = document.createElement('input')
                     name.setAttribute('id', 'expense-name')
                     name.setAttribute('disabled', '')
@@ -82,38 +75,43 @@ class listExpenses extends HTMLElement {
                     buttonsWrapper.setAttribute('class', 'buttons-wrapper')
                     card.appendChild(buttonsWrapper)
 
-                    // Botão de salvar
+                    // Botão de editar
                     const editButton = document.createElement('button')
                     editButton.setAttribute('id', 'edit-expense')
-                    editButton.setAttribute('type', 'button')
-                    editButton.setAttribute('value', 'Editar')
+                    editButton.setAttribute('function', 'editExpense')
                     editButton.addEventListener('click', this.editExpense)
                     buttonsWrapper.appendChild(editButton)
 
                     const editImg = document.createElement('img')
-                    editImg.setAttribute('class', 'edit-img')
+                    editImg.setAttribute('id', 'edit-img')
                     editImg.setAttribute('src', 'assets/image/pencil.png')
                     editImg.setAttribute('alt', 'edit image')
+                    editImg.setAttribute('title', 'Editar despesa')
                     editButton.appendChild(editImg)
+
+                    const cancelImg = document.createElement('img')
+                    cancelImg.setAttribute('id', 'cancel-img')
+                    cancelImg.setAttribute('src', 'assets/image/cancel.png')
+                    cancelImg.setAttribute('alt', 'Botão de salvar')
+                    cancelImg.setAttribute('title', 'Canxelar edição')
+                    editButton.appendChild(cancelImg)
 
                     // Botão de salvar
                     const saveButton = document.createElement('button')
                     saveButton.setAttribute('id', 'save-expense')
-                    saveButton.setAttribute('type', 'button')
                     saveButton.setAttribute('title', 'Salvar')
-                    saveButton.addEventListener('click', this.editExpense)
+                    saveButton.addEventListener('click', this.saveExpense)
                     buttonsWrapper.appendChild(saveButton)
 
                     const saveImg = document.createElement('img')
-                    saveImg.setAttribute('class', 'edit-img')
+                    saveImg.setAttribute('class', 'save-img')
                     saveImg.setAttribute('src', 'assets/image/save.png')
-                    saveImg.setAttribute('alt', 'edit image')
+                    saveImg.setAttribute('alt', 'Botão de salvar')
                     saveButton.appendChild(saveImg)
 
                     // Botão de delete
                     const deleteButton = document.createElement('button')
                     deleteButton.setAttribute('id', 'delete-expense')
-                    deleteButton.setAttribute('type', 'button')
                     deleteButton.setAttribute('title', 'Excluir')
                     deleteButton.addEventListener('click', this.deleteExpense)
                     buttonsWrapper.appendChild(deleteButton)
@@ -121,7 +119,7 @@ class listExpenses extends HTMLElement {
                     const deleteImg = document.createElement('img')
                     deleteImg.setAttribute('class', 'delete-img')
                     deleteImg.setAttribute('src', 'assets/image/delete.png')
-                    deleteImg.setAttribute('alt', 'delete image')
+                    deleteImg.setAttribute('alt', 'Botão de deletar')
                     deleteButton.appendChild(deleteImg)
 
                     cardSection.appendChild(card)
@@ -145,7 +143,8 @@ class listExpenses extends HTMLElement {
 
     deleteExpense(e) {
 
-        const expenseId = e.currentTarget.parentElement.getAttribute('id')
+
+        const expenseId = e.currentTarget.parentElement.parentElement.getAttribute('id')
 
         fetch(`http://localhost:3000/expense/${expenseId}`, {
             method: 'DELETE',
@@ -159,63 +158,78 @@ class listExpenses extends HTMLElement {
             .catch(err => console.log(err))
 
 
-        const cardContent = e.currentTarget.parentElement
+        const cardContent = e.currentTarget.parentElement.parentElement
         cardContent.remove()
     }
 
     editExpense(e) {
 
-        const saveId = e.currentTarget.parentElement.getAttribute('id')
-        const saveButton = e.currentTarget.parentElement.querySelector('#edit-expense')
+        e.currentTarget.classList.toggle('active')
+        const functionButton = e.currentTarget.getAttribute('function')
 
-        if (saveButton.value === 'Editar') {
+        if (functionButton === 'editExpense') {
 
-            e.currentTarget.parentElement.querySelector('#cancel-button').setAttribute('class', 'cancel-button')
-            e.currentTarget.parentElement.querySelector('#expense-name').removeAttribute('disabled')
-            e.currentTarget.parentElement.querySelector('#expense-price').removeAttribute('disabled')
-            e.currentTarget.parentElement.querySelector('#experation-day').removeAttribute('disabled')
-            e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('value', 'Salvar')
+            e.currentTarget.parentElement.parentElement.querySelector('#expense-name').removeAttribute('disabled')
+            e.currentTarget.parentElement.parentElement.querySelector('#expense-price').removeAttribute('disabled')
+            e.currentTarget.parentElement.parentElement.querySelector('#experation-day').removeAttribute('disabled')
+
+            e.currentTarget.setAttribute('function', 'cancelExpense')
+            e.currentTarget.parentElement.querySelector('#save-expense').setAttribute('class', 'active')
 
         } else {
 
-            const expenseName = e.currentTarget.parentElement.querySelector('#expense-name')
-            const expensePrice = e.currentTarget.parentElement.querySelector('#expense-price')
-            const priceSplit = expensePrice.value
-            const priceArray = priceSplit.split('R$ ')
-            const expenseExperationDay = e.currentTarget.parentElement.querySelector('#experation-day')
+            e.currentTarget.parentElement.parentElement.querySelector('#expense-name').setAttribute('disabled', '')
+            e.currentTarget.parentElement.parentElement.querySelector('#expense-price').setAttribute('disabled', '')
+            e.currentTarget.parentElement.parentElement.querySelector('#experation-day').setAttribute('disabled', '')
 
-            const expenseElement = {
-
-                name: expenseName.value,
-                price: priceArray[1],
-                experationDay: expenseExperationDay.value
-            }
-
-            const init = {
-
-                method: 'PATCH',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(expenseElement)
-            }
-
-            fetch(`http://localhost:3000/expense/${saveId}`, init)
-                .then(response => response.json())
-                .then(data => {
-
-                    alert('Alteração realizada com sucesso!')
-                    // location.reload()
-
-                })
-                .catch(err => console.log(err))
-
-            e.currentTarget.parentElement.querySelector('#expense-name').setAttribute('disabled', '')
-            e.currentTarget.parentElement.querySelector('#expense-price').setAttribute('disabled', '')
-            e.currentTarget.parentElement.querySelector('#experation-day').setAttribute('disabled', '')
-            e.currentTarget.parentElement.querySelector('#cancel-button').removeAttribute('class', 'cancel-button')
-            e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('value', 'Editar')
+            e.currentTarget.setAttribute('function', 'editExpense')
+            e.currentTarget.parentElement.querySelector('#save-expense').removeAttribute('class', 'active')
         }
+    }
+
+    saveExpense(e) {
+
+        const expenseId = e.currentTarget.parentElement.parentElement.getAttribute('id')
+
+        const expenseName = e.currentTarget.parentElement.parentElement.querySelector('#expense-name')
+        const expensePrice = e.currentTarget.parentElement.parentElement.querySelector('#expense-price')
+        const priceSplit = expensePrice.value
+        const priceArray = priceSplit.split('R$ ')
+        const expenseExperationDay = e.currentTarget.parentElement.parentElement.querySelector('#experation-day')
+
+        const expenseElement = {
+
+            name: expenseName.value,
+            price: priceArray[1],
+            experationDay: expenseExperationDay.value
+        }
+
+        const init = {
+
+            method: 'PATCH',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(expenseElement)
+        }
+
+        fetch(`http://localhost:3000/expense/${expenseId}`, init)
+            .then(response => response.json())
+            .then(data => {
+
+                alert('Alteração realizada com sucesso!')
+                // location.reload()
+
+            })
+            .catch(err => console.log(err))
+
+        e.currentTarget.parentElement.parentElement.querySelector('#expense-name').setAttribute('disabled', '')
+        e.currentTarget.parentElement.parentElement.querySelector('#expense-price').setAttribute('disabled', '')
+        e.currentTarget.parentElement.parentElement.querySelector('#experation-day').setAttribute('disabled', '')
+
+        e.currentTarget.parentElement.querySelector('#edit-expense').removeAttribute('class', 'active')
+        e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('function', 'editExpense')
+        e.currentTarget.removeAttribute('class')
     }
 
     styles() {
@@ -244,32 +258,16 @@ class listExpenses extends HTMLElement {
             }
             #list main .expense-card .buttons-wrapper {
                 display: flex;
+                justify-content: space-between;
                 gap: 15px;
                 margin-top: 10px;
-            }
-            #list main .expense-card #cancel-button {
-                position: absolute;
-                display: none;
-                top: -14px;
-                right: -14px;
-                font-weight: bold;
-                background: #fff;
-                box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.1);
-                border-radius: 50%;
-                padding: 2px 9px;
-                color: red;
-                height: 24px;
-                cursor: pointer;
-            }
-
-            #list main .expense-card .cancel-button {
-                display: block !important;
             }
 
             #list main .expense-card #edit-expense,
             #list main .expense-card #save-expense,
             #list main .expense-card #delete-expense {
-                border-radius: 16px;
+                border-radius: 50%;
+                display: flex;
                 box-shadow: 1px 1px 5px rgba(0, 0, 0, 0.2);
                 border: none;
                 background-color: #fff;
@@ -277,6 +275,14 @@ class listExpenses extends HTMLElement {
                 color: #fff;
                 transition: 0.3s;
                 cursor: pointer;
+            }
+
+            #list main .expense-card #save-expense {
+                display: none;
+            }
+
+            #list main .expense-card #save-expense.active {
+                display: flex;
             }
 
             #list main .expense-card #edit-expense:hover,
@@ -287,11 +293,24 @@ class listExpenses extends HTMLElement {
                 transition: 0.3s;
             }
 
-            #list main .expense-card .edit-img, 
+            #list main .expense-card #edit-img, 
+            #list main .expense-card #cancel-img, 
             #list main .expense-card .save-img, 
             #list main .expense-card .delete-img {
                 width: 20px;
                 height: 20px;
+            }
+
+            #list main .expense-card #edit-expense.active #cancel-img {
+                display: block;
+            }
+
+            #list main .expense-card #edit-expense #cancel-img {
+                display: none;
+            }
+
+            #list main .expense-card #edit-expense.active #edit-img {
+                display: none;
             }
 
             #list main .expense-card input {
