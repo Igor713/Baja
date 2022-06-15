@@ -24,13 +24,6 @@ class listExpenses extends HTMLElement {
         const sectionList = document.createElement('section')
         sectionList.setAttribute('id', 'list')
 
-        // if (location.reload) {
-
-        //     const contentLoad = document.getElementById('content')
-        //     console.log(contentLoad)
-        //     contentLoad.innerHTML = localStorage.getItem('lastLink')
-        // }
-
         return sectionList
     }
 
@@ -41,6 +34,23 @@ class listExpenses extends HTMLElement {
         fetch("http://localhost:3000/expense")
             .then(response => response.json())
             .then(data => {
+
+                data.map((expense) => {
+
+                    let amount = 0
+
+                    for (let i = 0; i < expense.length; i++) {
+
+                        let sum = parseFloat(expense.price)
+                        amount += sum[i]
+
+                        return amount
+                    }
+
+                    console.log(amount)
+                })
+
+
 
                 data.map((item) => {
 
@@ -245,6 +255,7 @@ class listExpenses extends HTMLElement {
                 width: 100%;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
+                position: realtive;
             }
 
             #list main .expense-card {
