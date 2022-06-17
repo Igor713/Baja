@@ -35,22 +35,24 @@ class listExpenses extends HTMLElement {
             .then(response => response.json())
             .then(data => {
 
-                data.map((expense) => {
+                const amountTotal = data.map((expense) => {
 
-                    let amount = 0
+                    let expensePrice = expense.price.replace(',', '.')
+                    let expensePriceFloat = parseFloat(expensePrice)
 
-                    for (let i = 0; i < expense.length; i++) {
-
-                        let sum = parseFloat(expense.price)
-                        amount += sum[i]
-
-                        return amount
-                    }
-
-                    console.log(amount)
+                    return expensePriceFloat
                 })
 
+                let sum = 0
+                for (let i = 0; i < amountTotal.length; i++) {
 
+                    sum += amountTotal[i]
+                }
+
+                const cardResult = document.createElement('div')
+                cardResult.setAttribute('id', 'card-result')
+                cardResult.innerHTML = `Valor total das despesas <br><span>${sum.toFixed(2)}<span>`
+                cardSection.appendChild(cardResult)
 
                 data.map((item) => {
 
@@ -255,7 +257,24 @@ class listExpenses extends HTMLElement {
                 width: 100%;
                 display: grid;
                 grid-template-columns: 1fr 1fr 1fr 1fr;
-                position: realtive;
+                position: relative;
+            }
+
+            #list main #card-result {
+                background-color: #fff;
+                border-radius: 5px;
+                box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.2);
+                padding: 15px;
+                position: fixed;
+                bottom: 15px;
+                right: 30px;
+                text-align: center;
+                z-index: 1;
+            }
+
+            #list main #card-result span {
+                font-weight: bold;
+                color: green;
             }
 
             #list main .expense-card {
