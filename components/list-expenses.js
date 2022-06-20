@@ -51,7 +51,7 @@ class listExpenses extends HTMLElement {
 
                 const cardResult = document.createElement('div')
                 cardResult.setAttribute('id', 'card-result')
-                cardResult.innerHTML = `Valor total das despesas <br><span>${sum.toFixed(2)}<span>`
+                cardResult.innerHTML = `Valor total das despesas <br><span id="amount-value">R$ ${sum.toFixed(2).replace('.', ',')}</span>`
                 cardSection.appendChild(cardResult)
 
                 data.map((item) => {
@@ -155,8 +155,10 @@ class listExpenses extends HTMLElement {
 
     deleteExpense(e) {
 
-
         const expenseId = e.currentTarget.parentElement.parentElement.getAttribute('id')
+        let expenseValue = e.currentTarget.parentElement.parentElement.querySelector('#expense-price').value
+        expenseValue = expenseValue.replace('R$', '')
+        expenseValue = expenseValue.replace(',', '.')
 
         fetch(`http://localhost:3000/expense/${expenseId}`, {
             method: 'DELETE',
@@ -169,9 +171,14 @@ class listExpenses extends HTMLElement {
             })
             .catch(err => console.log(err))
 
-
-        const cardContent = e.currentTarget.parentElement.parentElement
+        let cardContent = e.currentTarget.parentElement.parentElement
         cardContent.remove()
+
+        let amountTotal = document.querySelector('list-expenses').shadowRoot.querySelector('#amount-value').innerHTML.replace('R$ ', '')
+        amountTotal = amountTotal.replace(',', '.')
+
+        let newAmountTotal = amountTotal - expenseValue
+        document.querySelector('list-expenses').shadowRoot.querySelector('#amount-value').innerHTML = 'R$ ' + newAmountTotal.toFixed(2).replace('.', ',')
     }
 
     editExpense(e) {
