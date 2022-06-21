@@ -56,8 +56,6 @@ class registerExpenses extends HTMLElement {
     createForm() {
 
         const form = document.createElement('form')
-        // form.setAttribute('action', '/expense')
-        // form.setAttribute('method', 'POST')
         form.setAttribute('id', 'expense-form')
 
         return form
@@ -84,6 +82,7 @@ class registerExpenses extends HTMLElement {
         inputName.setAttribute('type', 'text')
         inputName.setAttribute('name', 'expense-name')
         inputName.setAttribute('id', 'expense-name')
+        inputName.setAttribute('maxlength', '15')
 
         return inputName
     }
@@ -101,6 +100,7 @@ class registerExpenses extends HTMLElement {
         inputPrice.setAttribute('type', 'text')
         inputPrice.setAttribute('name', 'expense-price')
         inputPrice.setAttribute('id', 'expense-price')
+        inputPrice.addEventListener('keyup', this.formatPrice)
 
         return inputPrice
     }
@@ -115,7 +115,9 @@ class registerExpenses extends HTMLElement {
 
     createInputExperationDay() {
         const inputExperationDay = document.createElement('input')
-        inputExperationDay.setAttribute('type', 'text')
+        inputExperationDay.setAttribute('type', 'date')
+        inputExperationDay.setAttribute('min', '01/01/2000')
+        inputExperationDay.setAttribute('max', '31/12/2050')
         inputExperationDay.setAttribute('name', 'expense-experationDay')
         inputExperationDay.setAttribute('id', 'expense-experation-day')
 
@@ -131,6 +133,13 @@ class registerExpenses extends HTMLElement {
         registerButton.addEventListener('click', this.registerExpense)
 
         return registerButton
+    }
+
+    formatPrice(e) {
+
+        const inputPrice = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
+        inputPrice = Number(inputPrice.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+
     }
 
     registerExpense() {
