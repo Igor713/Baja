@@ -137,15 +137,18 @@ class registerExpenses extends HTMLElement {
 
     formatPrice(e) {
 
-        const inputPrice = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
-        inputPrice = Number(inputPrice.value).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+        let input = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
+        let inputPriceString = e.currentTarget.value
+        inputPriceString.toString()
+        let inputPrice = inputPriceString.replace('R$', '')
+        let inputPriceFloat = parseFloat(inputPrice)
 
+        input.value = inputPriceFloat.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
     }
 
     registerExpense() {
 
         const formData = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-form')
-
 
         formData.addEventListener('submit', (e) => {
 
