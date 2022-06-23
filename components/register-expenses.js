@@ -27,10 +27,8 @@ class registerExpenses extends HTMLElement {
         const inputExperationDay = this.createInputExperationDay()
 
         const button = this.createRegisterButton()
-        // const messageSuccess = this.createMessage()
 
         formWrapper.appendChild(form)
-        // formWrapper.appendChild(messageSuccess)
         form.appendChild(title)
 
         form.appendChild(labelName)
@@ -100,7 +98,7 @@ class registerExpenses extends HTMLElement {
         inputPrice.setAttribute('type', 'text')
         inputPrice.setAttribute('name', 'expense-price')
         inputPrice.setAttribute('id', 'expense-price')
-        inputPrice.addEventListener('keyup', this.formatPrice)
+        inputPrice.addEventListener('blur', this.formatPrice)
 
         return inputPrice
     }
@@ -138,9 +136,7 @@ class registerExpenses extends HTMLElement {
     formatPrice(e) {
 
         let input = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
-        let inputPriceString = e.currentTarget.value
-        inputPriceString.toString()
-        let inputPrice = inputPriceString.replace('R$', '')
+        let inputPrice = e.currentTarget.value
         let inputPriceFloat = parseFloat(inputPrice)
 
         input.value = inputPriceFloat.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
