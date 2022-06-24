@@ -37,8 +37,11 @@ class listExpenses extends HTMLElement {
 
                 const amountTotal = data.map((expense) => {
 
-                    let expensePrice = expense.price.replace(',', '.')
+                    let expensePrice = expense.price.replace('R$', '')
+                    expensePrice.replace(',', '.')
                     let expensePriceFloat = parseFloat(expensePrice)
+
+                    console.log(expensePriceFloat)
 
                     return expensePriceFloat
                 })
@@ -69,7 +72,7 @@ class listExpenses extends HTMLElement {
                     const price = document.createElement('input')
                     price.setAttribute('id', 'expense-price')
                     price.setAttribute('disabled', '')
-                    price.setAttribute('value', 'R$ ' + item.price)
+                    price.setAttribute('value', item.price)
                     card.appendChild(price)
 
                     const messageExperation = document.createElement('div')
@@ -79,6 +82,7 @@ class listExpenses extends HTMLElement {
 
                     const experationDay = document.createElement('input')
                     experationDay.setAttribute('id', 'experation-day')
+                    experationDay.setAttribute('type', 'date')
                     experationDay.setAttribute('disabled', '')
                     experationDay.setAttribute('value', item.experationDay)
                     card.appendChild(experationDay)
@@ -160,6 +164,8 @@ class listExpenses extends HTMLElement {
         expenseValue = expenseValue.replace('R$', '')
         expenseValue = expenseValue.replace(',', '.')
 
+        console.log(expenseValue)
+
         fetch(`http://localhost:3000/expense/${expenseId}`, {
             method: 'DELETE',
         })
@@ -170,9 +176,6 @@ class listExpenses extends HTMLElement {
                 alert('Exclusão realizada com sucesso!')
             })
             .catch(err => console.log(err))
-
-        let cardContent = e.currentTarget.parentElement.parentElement
-        cardContent.remove()
 
         let amountTotal = document.querySelector('list-expenses').shadowRoot.querySelector('#amount-value').innerHTML.replace('R$ ', '')
         amountTotal = amountTotal.replace(',', '.')
@@ -237,8 +240,6 @@ class listExpenses extends HTMLElement {
             .then(data => {
 
                 alert('Alteração realizada com sucesso!')
-                // location.reload()
-
             })
             .catch(err => console.log(err))
 
@@ -256,6 +257,10 @@ class listExpenses extends HTMLElement {
         const style = document.createElement('style')
         style.textContent = `
 
+            * {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+            
             #list {
                 padding: 15px;
             }
@@ -293,6 +298,7 @@ class listExpenses extends HTMLElement {
                 border-radius: 5px;
                 position: relative;
             }
+
             #list main .expense-card .buttons-wrapper {
                 display: flex;
                 justify-content: space-between;

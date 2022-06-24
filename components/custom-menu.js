@@ -72,20 +72,28 @@ class customMenu extends HTMLElement {
     styles() {
         const style = document.createElement('style')
         style.textContent = `
+
+            * {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+
             .nav {
                 display: flex;
                 flex-direction: column;
             }
+
             .nav .nav-link {
                 color: #fff;
                 text-decoration: none;
                 padding: 10px 10px; 
                 font-size: 16px;
             }
+
             .nav .nav-link:hover {
                 background-color: #393E46;
                 transition: all 0.5s;
             }
+            
             .nav .nav-link:focus {
                 background-color: #393E46;
             }

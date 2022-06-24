@@ -80,7 +80,9 @@ class registerExpenses extends HTMLElement {
         inputName.setAttribute('type', 'text')
         inputName.setAttribute('name', 'expense-name')
         inputName.setAttribute('id', 'expense-name')
-        inputName.setAttribute('maxlength', '15')
+        inputName.setAttribute('maxlength', '25')
+        inputName.setAttribute('autocomplete', 'off')
+        inputName.setAttribute('required', '')
 
         return inputName
     }
@@ -98,6 +100,8 @@ class registerExpenses extends HTMLElement {
         inputPrice.setAttribute('type', 'text')
         inputPrice.setAttribute('name', 'expense-price')
         inputPrice.setAttribute('id', 'expense-price')
+        inputPrice.setAttribute('required', '')
+        inputPrice.setAttribute('autocomplete', 'off')
         inputPrice.addEventListener('blur', this.formatPrice)
 
         return inputPrice
@@ -117,6 +121,8 @@ class registerExpenses extends HTMLElement {
         inputExperationDay.setAttribute('min', '01/01/2000')
         inputExperationDay.setAttribute('max', '31/12/2050')
         inputExperationDay.setAttribute('name', 'expense-experationDay')
+        inputExperationDay.setAttribute('required', '')
+        inputExperationDay.setAttribute('autocomplete', 'off')
         inputExperationDay.setAttribute('id', 'expense-experation-day')
 
         return inputExperationDay
@@ -135,11 +141,16 @@ class registerExpenses extends HTMLElement {
 
     formatPrice(e) {
 
-        let input = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
         let inputPrice = e.currentTarget.value
-        let inputPriceFloat = parseFloat(inputPrice)
+        let input = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
 
-        input.value = inputPriceFloat.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+        if (inputPrice === '') {
+            input.value = ''
+        } else {
+
+            let inputPriceFloat = parseFloat(inputPrice)
+            input.value = inputPriceFloat.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+        }
     }
 
     registerExpense() {
@@ -190,6 +201,10 @@ class registerExpenses extends HTMLElement {
 
         const style = document.createElement('style')
         style.textContent = `
+
+            * {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
             
             .form-wrapper {
                 display: flex;
@@ -199,6 +214,7 @@ class registerExpenses extends HTMLElement {
                 height: 100%;
                 position: relative;
             }
+
             #expense-form {
                 border-radius: 5px;
                 display: flex;
@@ -208,9 +224,11 @@ class registerExpenses extends HTMLElement {
                 box-shadow: 0 5px 5px rgb(0,0,0,0.1);
                 max-width: 500px;
             }
+
             #expense-form h2 {
                 margin: 0;
             }
+
             #expense-form input {
                 border: none;
                 border-bottom: 1px solid #393E46;
@@ -238,6 +256,7 @@ class registerExpenses extends HTMLElement {
                 transition: 0.5s;
                 cursor: pointer;
             }
+
             #expense-form .submit-button:hover {
                 background-color: #d1711e;
                 transition: 0.5s;

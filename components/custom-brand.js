@@ -41,6 +41,10 @@ class customBrand extends HTMLElement {
         const style = document.createElement('style')
         style.textContent = `
 
+            * {
+                font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            }
+
             .brand-wrapper {
                 display: flex;
                 justify-content: center;
