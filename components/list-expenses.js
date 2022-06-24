@@ -41,8 +41,6 @@ class listExpenses extends HTMLElement {
                     expensePrice.replace(',', '.')
                     let expensePriceFloat = parseFloat(expensePrice)
 
-                    console.log(expensePriceFloat)
-
                     return expensePriceFloat
                 })
 
@@ -176,6 +174,9 @@ class listExpenses extends HTMLElement {
                 alert('Exclusão realizada com sucesso!')
             })
             .catch(err => console.log(err))
+
+        let cardContent = e.currentTarget.parentElement.parentElement
+        cardContent.remove()
 
         let amountTotal = document.querySelector('list-expenses').shadowRoot.querySelector('#amount-value').innerHTML.replace('R$ ', '')
         amountTotal = amountTotal.replace(',', '.')

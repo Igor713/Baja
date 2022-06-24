@@ -55,6 +55,7 @@ class registerExpenses extends HTMLElement {
 
         const form = document.createElement('form')
         form.setAttribute('id', 'expense-form')
+        form.addEventListener('submit', this.registerExpense)
 
         return form
     }
@@ -134,7 +135,7 @@ class registerExpenses extends HTMLElement {
         registerButton.setAttribute('value', 'Registrar')
         registerButton.setAttribute('class', 'submit-button')
         registerButton.innerHTML = "Cadastrar"
-        registerButton.addEventListener('click', this.registerExpense)
+        // registerButton.addEventListener('submit', this.registerExpense)
 
         return registerButton
     }
@@ -155,46 +156,43 @@ class registerExpenses extends HTMLElement {
 
     registerExpense() {
 
-        const formData = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-form')
+        const reload = document.querySelector('#content')
 
-        formData.addEventListener('submit', (e) => {
+        const expenseName = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-name')
+        const expensePrice = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
+        const expenseExperationDay = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-experation-day')
 
-            e.preventDefault()
+        const expenseElement = {
 
-            const expenseName = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-name')
-            const expensePrice = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-price')
-            const expenseExperationDay = document.querySelector('register-expenses').shadowRoot.querySelector('#expense-experation-day')
+            name: expenseName.value,
+            price: expensePrice.value,
+            experationDay: expenseExperationDay.value
+        }
 
-            const expenseElement = {
+        const init = {
 
-                name: expenseName.value,
-                price: expensePrice.value,
-                experationDay: expenseExperationDay.value
-            }
+            method: 'POST',
+            headers: {
+                "Content-Type": 'application/json'
+            },
+            body: JSON.stringify(expenseElement)
+        }
 
-            const init = {
+        fetch('http://localhost:3000/expense', init)
+            .then(r => r.json())
+            .then(result => {
+                console.log(result)
+            }).catch(err => {
+                console.log(err)
+            })
 
-                method: 'POST',
-                headers: {
-                    "Content-Type": 'application/json'
-                },
-                body: JSON.stringify(expenseElement)
-            }
+        expenseName.value = ''
+        expensePrice.value = ''
+        expenseExperationDay.value = ''
 
-            fetch('http://localhost:3000/expense', init)
-                .then(r => r.json())
-                .then(result => {
-                    console.log(result)
-                }).catch(err => {
-                    console.log(err)
-                })
+        alert('Despesa cadastrada com sucesso!')
 
-            expenseName.value = ''
-            expensePrice.value = ''
-            expenseExperationDay.value = ''
-
-            alert('Despesa cadastrada com sucesso!')
-        })
+        reload.innerHTML = '<register-expenses></register-expenses>'
     }
 
     styles() {
