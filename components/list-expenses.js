@@ -213,17 +213,16 @@ class listExpenses extends HTMLElement {
     saveExpense(e) {
 
         const expenseId = e.currentTarget.parentElement.parentElement.getAttribute('id')
+        const reload = document.querySelector('#content')
 
         const expenseName = e.currentTarget.parentElement.parentElement.querySelector('#expense-name')
         const expensePrice = e.currentTarget.parentElement.parentElement.querySelector('#expense-price')
-        const priceSplit = expensePrice.value
-        const priceArray = priceSplit.split('R$ ')
         const expenseExperationDay = e.currentTarget.parentElement.parentElement.querySelector('#experation-day')
 
         const expenseElement = {
 
             name: expenseName.value,
-            price: priceArray[1],
+            price: expensePrice.value,
             experationDay: expenseExperationDay.value
         }
 
@@ -251,6 +250,8 @@ class listExpenses extends HTMLElement {
         e.currentTarget.parentElement.querySelector('#edit-expense').removeAttribute('class', 'active')
         e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('function', 'editExpense')
         e.currentTarget.removeAttribute('class')
+
+        reload.innerHTML = '<list-expenses></list-expenses>'
     }
 
     styles() {
