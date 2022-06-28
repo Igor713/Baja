@@ -251,7 +251,9 @@ class listExpenses extends HTMLElement {
         e.currentTarget.parentElement.querySelector('#edit-expense').setAttribute('function', 'editExpense')
         e.currentTarget.removeAttribute('class')
 
-        reload.innerHTML = '<list-expenses></list-expenses>'
+        setTimeout(() => {
+            reload.innerHTML = '<list-expenses></list-expenses>'
+        }, 1000)
     }
 
     styles() {
